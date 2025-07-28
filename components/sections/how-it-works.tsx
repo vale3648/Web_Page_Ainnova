@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
-import { RobotMascot } from "@/components/ui/robot-mascot"
+import Image from "next/image"
 
 const steps = [
   {
@@ -72,7 +72,7 @@ export function HowItWorks() {
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg">{step.description}</p>
               </div>
 
-              {/* Visual con Rex */}
+              {/* Visual con Nova */}
               <div className="flex-1 flex justify-center">
                 <motion.div
                   className="relative"
@@ -80,8 +80,14 @@ export function HowItWorks() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <div className="w-64 h-64 bg-gradient-to-br from-brand-gold/5 to-brand-navy-dark/5 dark:from-brand-gold/10 dark:to-brand-navy-medium/10 rounded-3xl flex items-center justify-center relative overflow-hidden">
-                    <RobotMascot size="lg" animated={true} />
-
+                    <div className="w-40 h-40 relative rounded-lg overflow-hidden">
+                      <Image
+                        src="/images/second-dog.png"
+                        alt="Segunda mascota"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                     {/* Elementos decorativos */}
                     <motion.div
                       className="absolute top-4 right-4 w-3 h-3 bg-brand-gold rounded-full"

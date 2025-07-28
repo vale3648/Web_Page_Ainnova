@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, animate, easeInOut } from "framer-motion"
 import Image from "next/image"
 
 interface RobotMascotProps {
@@ -23,7 +23,7 @@ export function RobotMascot({ size = "md", animated = true, className = "" }: Ro
         transition: {
           duration: 3,
           repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
+          ease: easeInOut,
         },
       }
     : {}
@@ -34,7 +34,7 @@ export function RobotMascot({ size = "md", animated = true, className = "" }: Ro
         transition: {
           duration: 2,
           repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
+          ease: easeInOut,
         },
       }
     : {}
@@ -49,7 +49,7 @@ export function RobotMascot({ size = "md", animated = true, className = "" }: Ro
       <motion.div animate={pulseAnimation}>
         <Image
           src="/images/robot-dog-mascot.png"
-          alt="Rex - Mascota robótica de AInova"
+          alt="Nova - Mascota robótica de AInova"
           width={200}
           height={200}
           className="w-full h-full object-contain"

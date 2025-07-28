@@ -23,7 +23,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <span className="inline-block px-4 py-2 bg-brand-gold/10 dark:bg-brand-gold/20 text-brand-navy-dark dark:text-brand-gold text-sm font-medium rounded-full border border-brand-gold/20 dark:border-brand-gold/30 mb-6">
-                ✨ Transformación Digital con IA
+                Automatiza Innova Escala
               </span>
             </motion.div>
 
@@ -59,14 +59,6 @@ export function HeroSection() {
                 Comenzar ahora
                 <DynamicIcon name="ArrowRight" className="ml-2 w-5 h-5" />
               </Button>
-
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-gray-200 dark:border-brand-gold/30 hover:border-brand-gold dark:hover:border-brand-gold hover:text-brand-gold dark:text-brand-gold px-8 py-4 text-lg font-medium rounded-xl transition-all duration-300 bg-transparent"
-              >
-                Ver demo
-              </Button>
             </motion.div>
 
             {/* Stats minimalistas */}
@@ -76,22 +68,10 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div>
-                <div className="text-3xl font-bold text-brand-gold">15x</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Mayor conversión</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-brand-gold">80%</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Menos tiempo</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-brand-gold">78%</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Mejor rendimiento</div>
-              </div>
             </motion.div>
           </motion.div>
 
-          {/* Lado visual con Rex */}
+          {/* Lado visual con Nova */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -128,7 +108,7 @@ export function HeroSection() {
               }}
             />
 
-            {/* Rex principal */}
+            {/* Nova principal */}
             <div className="relative z-10 flex flex-col items-center space-y-6">
               <RobotMascot size="xl" animated={true} />
 
@@ -138,7 +118,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <h3 className="text-2xl font-bold text-brand-navy-dark dark:text-brand-gold mb-2">Conoce a Rex</h3>
+                <h3 className="text-2xl font-bold text-brand-navy-dark dark:text-brand-gold mb-2">Conoce a Nova</h3>
                 <p className="text-gray-600 dark:text-gray-300">Tu asistente robótico para la transformación digital</p>
               </motion.div>
             </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { NAVIGATION_ITEMS } from "@/lib/constants"
+import Image from "next/image"
 
 export function Header() {
   return (
@@ -20,9 +21,13 @@ export function Header() {
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          {/* Logo original - SIN CAMBIOS */}
-          <div className="w-8 h-8 bg-gradient-to-br from-brand-gold to-brand-gold-dark rounded-lg flex items-center justify-center">
-            <DynamicIcon name="Bot" className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 relative rounded-lg overflow-hidden">
+            <Image
+              src="/images/logo.png"
+              alt="Logo Alnova"
+              fill
+              className="object-contain"
+            />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">AInova</h1>

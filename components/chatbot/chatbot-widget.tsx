@@ -25,7 +25,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "¡Hola! Soy Rex, tu asistente de IA. ¿En qué puedo ayudarte hoy?",
+      text: "¡Hola! Soy Nova, tu asistente de IA. ¿En qué puedo ayudarte hoy?",
       isUser: false,
       timestamp: new Date(),
     },
@@ -106,7 +106,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                 <div className="flex items-center space-x-3">
                   <RobotMascot size="sm" animated={true} />
                   <div>
-                    <h3 className="font-semibold text-brand-navy-dark">Rex AI Assistant</h3>
+                    <h3 className="font-semibold text-brand-navy-dark">Nova AI Assistant</h3>
                     <p className="text-xs text-gray-600">En línea</p>
                   </div>
                 </div>

@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
-import { RobotMascot } from "@/components/ui/robot-mascot"
 import { COMPANY_INFO } from "@/lib/constants"
+import Image from "next/image"
 
 const footerSections = {
   services: ["Chatbots Inteligentes", "Automatización", "Big Data Analytics", "CRM Personalizado"],
@@ -24,14 +24,21 @@ export function Footer() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <RobotMascot size="sm" animated={true} />
+              <div className="w-10 h-10 relative rounded-lg overflow-hidden">
+                <Image
+                  src="/images/logo.png"
+                  alt="Logo Alnova"
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <div>
                 <h3 className="text-xl font-bold">{COMPANY_INFO.name}</h3>
-                <p className="text-xs text-gray-400">con Rex</p>
+                <p className="text-xs text-gray-400">con Nova</p>
               </div>
             </motion.div>
             <p className="text-gray-400 mb-4 leading-relaxed">
-              Transformamos empresas a través de la inteligencia artificial y la innovación tecnológica, con Rex como
+              Transformamos empresas a través de la inteligencia artificial y la innovación tecnológica, con Nova como
               nuestro compañero digital.
             </p>
           </div>
@@ -100,7 +107,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 {COMPANY_INFO.name}. Todos los derechos reservados. Rex es nuestra mascota oficial. 🐕‍🦺</p>
+          <p>&copy; 2024 {COMPANY_INFO.name}. Todos los derechos reservados. Nova es nuestra mascota oficial. 🐕‍🦺</p>
         </div>
       </div>
     </footer>

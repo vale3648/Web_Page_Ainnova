@@ -19,7 +19,7 @@ export function useChatbot(config: ChatbotConfig = {}) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: config.welcomeMessage || "¡Hola! Soy Rex, tu asistente de IA. ¿En qué puedo ayudarte hoy?",
+      text: config.welcomeMessage || "¡Hola! Soy Nova, tu asistente de IA. ¿En qué puedo ayudarte hoy?",
       isUser: false,
       timestamp: new Date(),
     },
@@ -76,7 +76,7 @@ export function useChatbot(config: ChatbotConfig = {}) {
     setMessages([
       {
         id: "welcome",
-        text: config.welcomeMessage || "¡Hola! Soy Rex, tu asistente de IA. ¿En qué puedo ayudarte hoy?",
+        text: config.welcomeMessage || "¡Hola! Soy Nova, tu asistente de IA. ¿En qué puedo ayudarte hoy?",
         isUser: false,
         timestamp: new Date(),
       },
