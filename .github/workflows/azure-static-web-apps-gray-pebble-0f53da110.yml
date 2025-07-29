@@ -28,7 +28,7 @@ jobs:
           action: "upload"
           app_location: "/"        # Carpeta raíz del proyecto
           api_location: ""         # No usas funciones API
-          output_location: "out"   # Carpeta generada por next export
+          output_location: ".next"   # Carpeta generada por next export
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
