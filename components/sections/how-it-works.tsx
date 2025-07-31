@@ -82,7 +82,7 @@ export function HowItWorks() {
                   <div className="w-64 h-64 bg-gradient-to-br from-brand-gold/5 to-brand-navy-dark/5 dark:from-brand-gold/10 dark:to-brand-navy-medium/10 rounded-3xl flex items-center justify-center relative overflow-hidden">
                     <div className="w-40 h-40 relative rounded-lg overflow-hidden">
                       <Image
-                        src="/images/second-dog.png"
+                        src="/images/imagen.png"
                         alt="Segunda mascota"
                         fill
                         className="object-contain"

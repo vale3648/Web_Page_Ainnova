@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
-import { RobotMascot } from "@/components/ui/robot-mascot"
+import Image from "next/image"
 import { ChatMessage } from "./chat-message"
 import { ChatInput } from "./chat-input"
 
@@ -104,7 +104,13 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
             <div className="p-4 border-b border-gray-200 dark:border-brand-navy-dark bg-brand-gold/10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <RobotMascot size="sm" animated={true} />
+                  <Image
+                    src="/images/second-dog.png"
+                    alt="Bot Logo"
+                    width={28}
+                    height={28}
+                    className="rounded"
+                  />
                   <div>
                     <h3 className="font-semibold text-brand-navy-dark">Nova AI Assistant</h3>
                     <p className="text-xs text-gray-600">En línea</p>
@@ -133,7 +139,13 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center space-x-2"
                 >
-                  <RobotMascot size="sm" animated={false} />
+                  <Image
+                    src="/images/second-dog.png"
+                    alt="Bot Logo"
+                    width={28}
+                    height={28}
+                    className="rounded"
+                  />
                   <div className="bg-gray-100 rounded-2xl px-4 py-2">
                     <div className="flex space-x-1">
                       <motion.div
@@ -189,7 +201,12 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <RobotMascot size="sm" animated={true} />
+                <Image
+                  src="/images/second-dog.png"
+                  alt="Bot Logo"
+                  fill
+                  className="object-contain"
+                />
               </motion.div>
             )}
           </AnimatePresence>
