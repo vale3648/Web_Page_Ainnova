@@ -7,9 +7,12 @@ import { ThemeProvider } from "@/lib/theme-context"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AInova - Transformación Digital con IA",
+  title: "AInnova - Transformación Digital con IA",
   description: "Soluciones de inteligencia artificial que transforman empresas",
-    generator: 'v0.dev'
+  generator: "v0.dev",
+  icons: {
+    icon: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({

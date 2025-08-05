@@ -6,7 +6,6 @@ import { ProblemStatement } from "@/components/sections/problem-statement"
 import { HowItWorks } from "@/components/sections/how-it-works"
 import { ServicesSection } from "@/components/sections/services-section"
 import { ConsultancySection } from "@/components/sections/consultancy-section"
-import { TrainingSection } from "@/components/sections/training-section"
 import { ScalableProductsSection } from "@/components/sections/scalable-products-section"
 import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
 
@@ -22,7 +21,6 @@ export default function HomePage() {
         <HowItWorks />
         <ServicesSection />
         <ConsultancySection />
-        <TrainingSection />
         <ScalableProductsSection />
       </main>
 

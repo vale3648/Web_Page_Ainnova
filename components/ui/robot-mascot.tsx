@@ -49,7 +49,7 @@ export function RobotMascot({ size = "md", animated = true, className = "" }: Ro
       <motion.div animate={pulseAnimation}>
         <Image
           src="/images/robot-dog-mascot.png"
-          alt="Nova - Mascota robótica de AInova"
+          alt="Nova - Mascota robótica de AInnova"
           width={200}
           height={200}
           className="w-full h-full object-contain"

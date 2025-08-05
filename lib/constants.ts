@@ -158,18 +158,6 @@ export const SERVICES = [
   },
 ]
 
-export const TRAINING_PROGRAMS = [
-  {
-    id: "ai-fundamentals",
-    title: "Fundamentos de IA",
-    description: "Curso introductorio sobre inteligencia artificial y sus aplicaciones empresariales",
-    duration: "40 horas",
-    modality: "Modalidad presencial y virtual",
-    icon: "GraduationCap",
-    color: "gold",
-  },
-]
-
 export const PARTNERSHIPS = [
   {
     id: "ai-providers",

@@ -7,7 +7,7 @@ import Image from "next/image"
 
 const footerSections = {
   services: ["Chatbots Inteligentes", "Automatización", "Big Data Analytics", "CRM Personalizado"],
-  company: ["Consultoría", "Formación", "Casos de Éxito", "Alianzas"],
+  company: ["Consultoría", "Formación", "Alianzas"],
 }
 
 export function Footer() {
