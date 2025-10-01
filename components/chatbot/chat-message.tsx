@@ -29,13 +29,16 @@ export function ChatMessage({ message }: ChatMessageProps) {
       )}
 
       <div
-        className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
-          message.isUser
+        className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${message.isUser
             ? "bg-brand-gold text-brand-navy-dark rounded-br-sm"
             : "bg-gray-100 text-gray-900 rounded-bl-sm"
-        }`}
+          }`}
       >
-        <p className="text-sm leading-relaxed">{message.text}</p>
+        {message.text.split("\n").map((line, i) => (
+          <p key={i} className="text-sm leading-relaxed">
+            {line}
+          </p>
+        ))}
         <p className="text-xs opacity-70 mt-1">
           {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </p>

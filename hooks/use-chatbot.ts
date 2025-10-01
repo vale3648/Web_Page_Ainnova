@@ -40,28 +40,30 @@ export function useChatbot(config: ChatbotConfig = {}) {
       setIsTyping(true)
 
       try {
-        // Aquí integrarías tu API real
-        // const response = await fetch(config.apiEndpoint, {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'Authorization': `Bearer ${config.apiKey}`
-        //   },
-        //   body: JSON.stringify({ message: text })
-        // })
-        // const data = await response.json()
+        // llamada real a n8n sin API Key
+        const res = await fetch(config.apiEndpoint!, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: text }),
+        });
 
-        // Simulación temporal
-        await new Promise((resolve) => setTimeout(resolve, 1500))
-
-        const botResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          text: getBotResponse(text),
-          isUser: false,
-          timestamp: new Date(),
+        if (!res.ok) {
+          throw new Error("Error de conexión con el servidor");
         }
 
-        setMessages((prev) => [...prev, botResponse])
+        const data = await res.json(); // { id, reply }
+
+        const botResponse: Message = {
+          id: data.id || (Date.now() + 1).toString(),
+          text: data.reply || "Respuesta vacía.",
+          isUser: false,
+          timestamp: new Date(),
+        };
+
+        setMessages((prev) => [...prev, botResponse]);
+
       } catch (error) {
         console.error("Error sending message:", error)
         setIsConnected(false)
@@ -90,23 +92,4 @@ export function useChatbot(config: ChatbotConfig = {}) {
     sendMessage,
     clearChat,
   }
-}
-
-// Función temporal para respuestas - reemplaza con tu lógica
-function getBotResponse(userMessage: string): string {
-  const lowerMessage = userMessage.toLowerCase()
-
-  if (lowerMessage.includes("servicio") || lowerMessage.includes("qué hacen")) {
-    return "Ofrecemos soluciones de IA como chatbots, automatización de procesos, análisis de Big Data, CRM personalizado y ciberseguridad. ¿Te interesa algún servicio en particular?"
-  }
-
-  if (lowerMessage.includes("precio") || lowerMessage.includes("costo")) {
-    return "Nuestros precios varían según el proyecto. Los chatbots empiezan desde $2,500/mes. ¿Te gustaría agendar una consulta gratuita para un presupuesto personalizado?"
-  }
-
-  if (lowerMessage.includes("consulta") || lowerMessage.includes("reunión")) {
-    return "¡Perfecto! Puedes agendar una consulta gratuita. Te conectaré con uno de nuestros especialistas. ¿Cuál es tu disponibilidad?"
-  }
-
-  return "Interesante pregunta. Nuestro equipo puede ayudarte con eso. ¿Te gustaría que te conecte con un especialista para discutir tu proyecto específico?"
 }
