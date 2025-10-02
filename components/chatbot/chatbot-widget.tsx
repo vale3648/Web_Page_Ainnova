@@ -7,6 +7,7 @@ import { DynamicIcon } from "@/components/ui/dynamic-icon"
 import Image from "next/image"
 import { ChatMessage } from "./chat-message"
 import { ChatInput } from "./chat-input"
+import { ChatbotService } from "./ChatbotService"
 
 interface Message {
   id: string
@@ -47,34 +48,39 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
       text,
       isUser: true,
       timestamp: new Date(),
-    }
+    };
 
-    setMessages((prev) => [...prev, userMessage])
-    setIsTyping(true)
+    setMessages((prev) => [...prev, userMessage]);
+    setIsTyping(true);
 
-    // Aquí es donde integrarías tu API del chatbot
-    // Por ahora simulo una respuesta
-    setTimeout(() => {
+    try {
+      const reply = await getBotResponse(text);
+
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: getBotResponse(text),
+        text: reply,
         isUser: false,
         timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, botResponse])
-      setIsTyping(false)
-    }, 1500)
-  }
+      };
+
+      setMessages((prev) => [...prev, botResponse]);
+    } catch (err: any) {
+      const errorResponse: Message = {
+        id: (Date.now() + 2).toString(),
+        text: `Hubo un problema obteniendo la respuesta: ${err?.message ?? 'Error desconocido'}`,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
 
   // Función temporal para simular respuestas - reemplaza con tu lógica
-  const getBotResponse = (userMessage: string): string => {
-    const responses = [
-      "Interesante pregunta. Nuestros servicios de IA pueden ayudarte con eso.",
-      "Te puedo conectar con un especialista para discutir tu proyecto específico.",
-      "Basándome en tu consulta, creo que nuestras soluciones de automatización serían perfectas.",
-      "¿Te gustaría agendar una consulta gratuita para explorar las opciones?",
-    ]
-    return responses[Math.floor(Math.random() * responses.length)]
+  const getBotResponse = async (userMessage: string): Promise<string> => {
+    return ChatbotService.enviarMensaje(userMessage);
   }
 
   const positionClasses = {
