@@ -1,6 +1,6 @@
 // ./ChatbotService.ts (lado cliente)
 export class ChatbotService {
-  private static readonly URL = "/api/chatbot";
+  private static readonly URL = "https://juandada.app.n8n.cloud/webhook/chatbot";
 
   static async enviarMensaje(message: string): Promise<string> {
     const res = await fetch(this.URL, {

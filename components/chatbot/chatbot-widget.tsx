@@ -45,7 +45,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
   const handleSendMessage = async (text: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
-      text,
+      text,                 // ✅ texto plano del usuario
       isUser: true,
       timestamp: new Date(),
     };
@@ -54,11 +54,11 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
     setIsTyping(true);
 
     try {
-      const reply = await getBotResponse(text);
+      const reply = await getBotResponse(text); // ✅ aquí sí esperas la promesa
 
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: reply,
+        text: reply,         // ✅ string
         isUser: false,
         timestamp: new Date(),
       };
@@ -80,8 +80,9 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
 
   // Función temporal para simular respuestas - reemplaza con tu lógica
   const getBotResponse = async (userMessage: string): Promise<string> => {
-    return ChatbotService.enviarMensaje(userMessage);
-  }
+    return await ChatbotService.enviarMensaje(userMessage);
+  };
+
 
   const positionClasses = {
     "bottom-right": "bottom-6 right-6",
