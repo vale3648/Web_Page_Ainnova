@@ -1,6 +1,6 @@
-// ./ChatbotService.ts (lado cliente)
+// ./ChatbotService.ts (para uso en el cliente)
 export class ChatbotService {
-  private static readonly URL = "https://juandada.app.n8n.cloud/webhook/chatbot";
+  private static readonly URL = "/api/chatbot"; // ← proxy interno
 
   static async enviarMensaje(message: string): Promise<string> {
     const res = await fetch(this.URL, {
@@ -9,22 +9,14 @@ export class ChatbotService {
       body: JSON.stringify({ message }),
     });
 
-    // lee como texto primero para evitar "Unexpected end of JSON input"
-    const raw = await res.text();
-    let data: any = null;
-    try { data = raw ? JSON.parse(raw) : null; } catch { /* no JSON */ }
-
+    const data = await res.json();
     if (!res.ok) {
-      const msg = data?.error || raw || `HTTP ${res.status}`;
-      throw new Error(msg);
+      throw new Error(data?.error ?? "Error en /api/chatbot");
     }
-
-    // normalizado por el route: { reply: string } o similar
-    if (data && typeof data === "object" && "reply" in data) {
-      return String(data.reply ?? "");
+    if (typeof data === "object" && "reply" in data) {
+      return data.reply as string;
     }
-    if (typeof data === "string") return data; // por si el route devolviera string
-    if (raw) return raw; // texto plano
-    return ""; // vacío
+    // si tu n8n devuelve { id, reply, ... } esto funcionará
+    throw new Error("Respuesta inesperada del proxy");
   }
 }
