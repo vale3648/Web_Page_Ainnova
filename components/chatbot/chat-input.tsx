@@ -50,7 +50,7 @@ export function ChatInput({ onSendMessage, disabled = false }: ChatInputProps) {
 
       {/* Sugerencias rápidas */}
       <div className="flex flex-wrap gap-2 mt-3">
-        {["¿Qué servicios ofrecen?", "Quiero una consulta", "Precios"].map((suggestion) => (
+        {["¿Qué servicios ofrecen?", "¿Ofrecen soporte técnico?", "¿Puedo recibir asesoría gratuita antes de comprar?"].map((suggestion) => (
           <button
             key={suggestion}
             onClick={() => !disabled && onSendMessage(suggestion)}

@@ -45,7 +45,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
   const handleSendMessage = async (text: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
-      text,                 // ✅ texto plano del usuario
+      text,
       isUser: true,
       timestamp: new Date(),
     };
@@ -54,29 +54,30 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
     setIsTyping(true);
 
     try {
-      const reply = await getBotResponse(text); // ✅ aquí sí esperas la promesa
+      const reply = await ChatbotService.enviarMensaje(text)
 
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: reply,         // ✅ string
+        text: reply,
         isUser: false,
         timestamp: new Date(),
-      };
+      }
 
       setMessages((prev) => [...prev, botResponse]);
     } catch (err: any) {
-      const errorResponse: Message = {
-        id: (Date.now() + 2).toString(),
-        text: `Hubo un problema obteniendo la respuesta: ${err?.message ?? 'Error desconocido'}`,
-        isUser: false,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorResponse]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 2).toString(),
+          text: `Hubo un problema obteniendo la respuesta.`,
+          isUser: false,
+          timestamp: new Date(),
+        },
+      ])
     } finally {
-      setIsTyping(false);
+      setIsTyping(false)
     }
-  };
-
+  }
 
   // Función temporal para simular respuestas - reemplaza con tu lógica
   const getBotResponse = async (userMessage: string): Promise<string> => {
@@ -105,37 +106,57 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className={`mb-4 w-80 h-96 rounded-2xl border shadow-2xl ${themeClasses[theme]} flex flex-col overflow-hidden`}
+            className={`
+              mb-4
+
+              w-[90vw]
+              h-[70vh]
+
+              md:w-[420px]
+              md:h-[560px]
+
+              rounded-2xl 
+              border 
+              shadow-2xl 
+              flex 
+              flex-col 
+              overflow-hidden 
+              ${themeClasses[theme]}
+            `}
           >
-            {/* Header del chat */}
-            <div className="p-4 border-b border-gray-200 dark:border-brand-navy-dark bg-brand-gold/10">
+
+            {/* HEADER */}
+            {/* 🔧 MODIFICADO: header más alto y elegante */}
+            <div className="p-5 border-b border-gray-200 dark:border-brand-navy-dark bg-[#222831]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <Image
                     src="/images/second-dog.png"
                     alt="Bot Logo"
-                    width={28}
-                    height={28}
+                    width={40}
+                    height={40}
                     className="rounded"
                   />
                   <div>
-                    <h3 className="font-semibold text-brand-navy-dark">Nova AI Assistant</h3>
-                    <p className="text-xs text-gray-600">En línea</p>
+                    <h3 className="font-semibold text-white text-lg">Nova AI Assistant</h3>
+                    <p className="text-xs text-gray-300">En línea</p>
                   </div>
                 </div>
+
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  className="h-8 w-8 p-0 hover:bg-gray-100"
+                  className="h-8 w-8 p-0 hover:bg-gray-700"
                 >
-                  <DynamicIcon name="X" className="w-4 h-4" />
+                  <DynamicIcon name="X" className="w-4 h-4 text-white" />
                 </Button>
               </div>
             </div>
 
-            {/* Área de mensajes */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {/* MENSAJES */}
+            {/* 🔧 MODIFICADO: padding más amplio y diseño más profesional */}
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[#1B1F27]">
               {messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
@@ -153,41 +174,37 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                     height={28}
                     className="rounded"
                   />
-                  <div className="bg-gray-100 rounded-2xl px-4 py-2">
-                    <div className="flex space-x-1">
-                      <motion.div
-                        className="w-2 h-2 bg-brand-gold rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Number.POSITIVE_INFINITY, delay: 0 }}
-                      />
-                      <motion.div
-                        className="w-2 h-2 bg-brand-gold rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Number.POSITIVE_INFINITY, delay: 0.2 }}
-                      />
-                      <motion.div
-                        className="w-2 h-2 bg-brand-gold rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Number.POSITIVE_INFINITY, delay: 0.4 }}
-                      />
-                    </div>
+                  <div className="bg-gray-200 rounded-2xl px-4 py-2">
+                    <div className="animate-pulse text-gray-500 text-sm">Escribiendo…</div>
                   </div>
                 </motion.div>
               )}
+
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input del chat */}
+            {/* INPUT */}
             <ChatInput onSendMessage={handleSendMessage} disabled={isTyping} />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Botón flotante */}
+      {/* BOTÓN FLOTANTE */}
       <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="relative">
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 rounded-full bg-brand-gold hover:bg-brand-gold-dark text-brand-navy-dark shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+          className="
+            w-16 h-16   /* 🔧 MÁS GRANDE */
+            rounded-full
+            bg-brand-gold 
+            hover:bg-brand-gold-dark 
+            text-brand-navy-dark 
+            shadow-lg 
+            hover:shadow-xl 
+            transition-all 
+            duration-300 
+            relative overflow-hidden
+          "
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -198,7 +215,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <DynamicIcon name="X" className="w-6 h-6" />
+                <DynamicIcon name="X" className="w-7 h-7" />
               </motion.div>
             ) : (
               <motion.div
@@ -208,18 +225,13 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <Image
-                  src="/images/second-dog.png"
-                  alt="Bot Logo"
-                  fill
-                  className="object-contain"
-                />
+                <Image src="/images/second-dog.png" alt="Bot Logo" fill className="object-contain" />
               </motion.div>
             )}
           </AnimatePresence>
         </Button>
 
-        {/* Indicador de notificación */}
+        {/* NOTIFICACIÓN */}
         {!isOpen && (
           <motion.div
             className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center"
