@@ -4,8 +4,10 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { RobotMascot } from "@/components/ui/robot-mascot"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
+import { useChatbot } from "@/components/chatbot/ChatbotContext"
 
 export function HeroSection() {
+  const { openChat } = useChatbot()
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-white dark:bg-brand-navy-darkest transition-colors duration-300">
       <div className="container mx-auto max-w-6xl">
@@ -53,6 +55,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               <Button
+                onClick={openChat} 
                 size="lg"
                 className="bg-brand-navy-dark hover:bg-brand-navy-darkest dark:bg-brand-gold dark:hover:bg-brand-gold-dark dark:text-brand-navy-dark text-white px-8 py-4 text-lg font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               >

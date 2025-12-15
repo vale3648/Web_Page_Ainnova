@@ -1,8 +1,11 @@
+"use client"
+
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
 import { ServiceDetailsTabs } from "@/components/ui/service-details-tabs"
 import { getColorClasses, type ColorVariant } from "@/lib/colors"
+import { useChatbot } from "@/components/chatbot/ChatbotContext"
 
 interface ServiceDetailModalProps {
   isOpen: boolean
@@ -23,6 +26,7 @@ interface ServiceDetailModalProps {
 }
 
 export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailModalProps) {
+  const { openChat } = useChatbot()
   const colorClasses = getColorClasses(service.color)
 
   return (
@@ -47,7 +51,7 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
             Solicitar Cotización
             <DynamicIcon name="ArrowRight" className="ml-2 w-4 h-4" />
           </Button>
-          <Button variant="outline" size="lg">
+          <Button onClick={openChat} variant="outline" size="lg">
             Agendar Consulta
           </Button>
         </div>

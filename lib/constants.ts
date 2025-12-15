@@ -13,7 +13,6 @@ export const COMPANY_INFO = {
 export const NAVIGATION_ITEMS = [
   { href: "#servicios", label: "Servicios" },
   { href: "#consultoria", label: "Consultoría" },
-  { href: "#formacion", label: "Formación" },
   { href: "#contacto", label: "Contacto" },
 ]
 

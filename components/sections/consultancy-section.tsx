@@ -1,6 +1,9 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { DynamicIcon } from "@/components/ui/dynamic-icon"
+import { useChatbot } from "@/components/chatbot/ChatbotContext"
 
 const consultancyFeatures = [
   {
@@ -18,6 +21,7 @@ const consultancyFeatures = [
 ]
 
 export function ConsultancySection() {
+  const { openChat } = useChatbot()
   return (
     <section id="consultoria" className="py-16 px-4 bg-gray-50">
       <div className="container mx-auto">
@@ -50,7 +54,7 @@ export function ConsultancySection() {
             <p className="text-gray-600 mb-6">
               Solicita una consulta gratuita y descubre cómo la IA puede revolucionar tu negocio.
             </p>
-            <Button className="w-full bg-brand-gold hover:bg-brand-gold-dark text-brand-navy-dark">
+            <Button onClick={openChat} className="w-full bg-brand-gold hover:bg-brand-gold-dark text-brand-navy-dark">
               Solicitar Consulta Gratuita
             </Button>
           </div>

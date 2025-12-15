@@ -8,6 +8,7 @@ import Image from "next/image"
 import { ChatMessage } from "./chat-message"
 import { ChatInput } from "./chat-input"
 import { ChatbotService } from "./ChatbotService"
+import { useChatbot } from "./ChatbotContext"
 
 interface Message {
   id: string
@@ -22,7 +23,7 @@ interface ChatbotWidgetProps {
 }
 
 export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: ChatbotWidgetProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const { isOpen, openChat, closeChat, toggleChat } = useChatbot()
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
@@ -146,7 +147,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeChat}
                   className="h-8 w-8 p-0 hover:bg-gray-700"
                 >
                   <DynamicIcon name="X" className="w-4 h-4 text-white" />
@@ -192,7 +193,7 @@ export function ChatbotWidget({ position = "bottom-right", theme = "brand" }: Ch
       {/* BOTÓN FLOTANTE */}
       <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="relative">
         <Button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleChat}
           className="
             w-16 h-16   /* 🔧 MÁS GRANDE */
             rounded-full

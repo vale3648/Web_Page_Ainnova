@@ -6,8 +6,10 @@ import { DynamicIcon } from "@/components/ui/dynamic-icon"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { NAVIGATION_ITEMS } from "@/lib/constants"
 import Image from "next/image"
+import { useChatbot } from "@/components/chatbot/ChatbotContext"
 
 export function Header() {
+  const { openChat } = useChatbot()
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -54,7 +56,7 @@ export function Header() {
         <div className="flex items-center space-x-4">
           <ThemeToggle />
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="bg-brand-navy-dark hover:bg-brand-navy-darkest dark:bg-brand-gold dark:hover:bg-brand-gold-dark dark:text-brand-navy-dark text-white px-6 py-2 rounded-xl font-medium shadow-sm">
+            <Button onClick={openChat} className="bg-brand-navy-dark hover:bg-brand-navy-darkest dark:bg-brand-gold dark:hover:bg-brand-gold-dark dark:text-brand-navy-dark text-white px-6 py-2 rounded-xl font-medium shadow-sm">
               Contactar
             </Button>
           </motion.div>
